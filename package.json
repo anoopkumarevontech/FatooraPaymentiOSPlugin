@@ -1,0 +1,16 @@
+{
+  "name": "fatoorapaymentiosplugin",
+  "version": "1.0.0",
+  "description": "Fatoora payment example in ionic",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Paymnent",
+    "Fatoora",
+    "Ionoic"
+  ],
+  "author": "Anoop kumar",
+  "license": "ISC"
+}

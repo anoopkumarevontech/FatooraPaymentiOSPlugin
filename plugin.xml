@@ -1,0 +1,23 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-fatoorapayment" version="1.0.0">
+   <name>FatooraPayMentiOSPlugin</name>
+
+   <js-module name="FatooraPayMentiOSPlugin" src="www/FatooraPayMentiOSPlugin.js">
+      <clobbers target="FatooraPayMentiOSPlugin" />
+   </js-module>
+
+   <platform name="ios">
+      <config-file parent="/*" target="config.xml">
+         <feature name="FatooraPayMentiOSPlugin">
+            <param name="ios-package" value="FatooraPayMentiOSPlugin" />
+         </feature>
+      </config-file>
+
+        <framework src="src/ios/MFSDK.framework" embed="true" custom="true" /> 
+        <source-file src="src/ios/MFSDK.framework" target-dir="lib" framework="true" />
+        
+      <source-file src="src/ios/FatooraPayMentiOSPlugin.m" />
+      <source-file src="src/ios/FatooraObjcBridge.swift" />
+   </platform>
+</plugin>
