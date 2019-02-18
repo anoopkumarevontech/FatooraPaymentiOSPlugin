@@ -48,7 +48,7 @@ public class BridgeMTTransaction:NSObject {
     
    @objc public var expireDate = ""
     
-   @objc public var invoiceValue = 0
+   @objc public var invoiceValueNSNumber = 0
     
    @objc public var comments = ""
     
@@ -75,7 +75,7 @@ public class BridgeMTTransaction:NSObject {
     
    @objc public var invoiceItems = [BridgeInvoiceItem]()
     
-   @objc public var transactionStatus = 0
+   @objc public var transactionStatus:NSNumber = 0
     
    @objc public var error = ""
     
