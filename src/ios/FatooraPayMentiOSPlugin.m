@@ -2,7 +2,9 @@
 
 #import <Cordova/CDV.h>
 #import <MFSDK/MFSDK.h>
-#import <MFSDKDemo-Swift.h>
+#import <MyApp-Swift.h>
+//#import <MFSDKDemo-Swift.h>
+
 
 @interface FatooraPayMentiOSPlugin : CDVPlugin<FatooraObjcBridgeProtocol> {
   // Member variables go here.
@@ -32,20 +34,23 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
-- (void) initialisePaymentDetails:(CDVInvokedUrlCommand)command{
-    _bridgeObject = [[FatooraObjcBridge alloc]init];
-    [_bridgeObject configureSettinsWithBuserName:@"apiaccount@myfatoorah.com" bpassword:@"api12345*" bbaseUrl:@"https://apidemo.myfatoorah.com/"];
-    [_bridgeObject setFatooraBridgeDelegate:self];
+- (void) initialisePaymentDetails:(CDVInvokedUrlCommand*)command{
+    bridgeObject = [[FatooraObjcBridge alloc]init];
+    [bridgeObject configureSettinsWithBuserName:@"apiaccount@myfatoorah.com" bpassword:@"api12345*" bbaseUrl:@"https://apidemo.myfatoorah.com/"];
+    [bridgeObject setFatooraBridgeDelegate:self];
+    CDVPluginResult* pluginResult = nil;
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Added merchant account"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void)payNow:(CDVInvokedUrlCommand*)command{
-NSDictionary *productDict = [[NSDictionary alloc]initWithObjectsAndKeys:@"Samosa",@"product_name",@"2",@"unit_value",@"5",@"quantity", nil];
+    NSDictionary *productDict = [[NSDictionary alloc]initWithObjectsAndKeys:@"Samosa",@"product_name",@"2",@"unit_value",@"5",@"quantity", nil];
     
     NSArray *array = [[NSArray alloc]initWithObjects:productDict, nil];
     
     NSDictionary *dict = [[NSDictionary alloc]initWithObjectsAndKeys:@"Anoop kumar",@"customerName",@"10.0",@"price",@"",@"customerEmail",
                           @"9808311471",@"customerMobile",array,@"productArray",@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",nil];
-     [_bridgeObject createInvoiceWithInvoiceDict:dict];
+    [bridgeObject createInvoiceWithInvoiceDict:dict];
 }
 
 - (void)didBridgePaymentCancel{
