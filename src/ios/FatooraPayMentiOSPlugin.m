@@ -12,7 +12,6 @@
   FatooraObjcBridge *bridgeObject;
 }
 
-- (void)coolMethod:(CDVInvokedUrlCommand*)command;
 - (void)initialisePaymentDetails:(CDVInvokedUrlCommand*)command;
 - (void)payNow:(CDVInvokedUrlCommand*)command;
 
@@ -20,30 +19,13 @@
 
 @implementation FatooraPayMentiOSPlugin
 
-- (void)coolMethod:(CDVInvokedUrlCommand*)command
-{
-    CDVPluginResult* pluginResult = nil;
-    NSString* echo = [command.arguments objectAtIndex:0];
-
-    if (echo != nil && [echo length] > 0) {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:echo];
-    } else {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-    }
-
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-}
-
 - (void) initialisePaymentDetails:(CDVInvokedUrlCommand*)command{
-    NSLog(@"Test data is ====%@",[command.arguments[0] valueForKey:@"merchantBaseUrl"]);
-    NSLog(@"Test data is ====%@",[command.arguments[0] valueForKey:@"merchantEmail"]);
-    NSLog(@"Test data is ====%@",[command.arguments[0] valueForKey:@"merchantPassword"]);
+    NSLog(@"Initialization data is ====%@",command.arguments[0]);
     CDVPluginResult* pluginResult = nil;
     if ([[command.arguments[0]allKeys] count] > 0) {
         bridgeObject = [[FatooraObjcBridge alloc]init];
         [bridgeObject configureSettinsWithBuserName:[command.arguments[0] valueForKey:@"merchantEmail"] bpassword:[command.arguments[0] valueForKey:@"merchantPassword"] bbaseUrl:[command.arguments[0] valueForKey:@"merchantBaseUrl"]];
         [bridgeObject setFatooraBridgeDelegate:self];
-       
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Added merchant account"];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     } else {
@@ -74,36 +56,35 @@
 }
 
 - (void)didBridgeInvoiceCreateSucessWithTransaction:(BridgeMTTransaction *)transaction{
-    NSLog(@"Is log file ====%@",transaction.description); 
+    NSLog(@"Is log file ====%@",transaction.description);
 
-    NSDictionary *successRespnoseDict = @{transaction.customerName:@"",
-                                          transaction.customerEmail:@"",
-                                          transaction.invoiceId:@"",
-                                          transaction.invoiceReference:@"",
-                                          transaction.createdDate:@"",
-                                          transaction.invoiceValue:@"",
-                                          transaction.comments:@"",
-                                          transaction.customerName:@"",
-                                          transaction.customerMobile:@"",
-                                          transaction.transactionDate:@"",
-                                          transaction.paymentGateway:@"",
-                                          transaction.referenceId:@"",
-                                          transaction.trackId:@"",
-                                          transaction.transactionId:@"",
-                                          transaction.paymentId:@"",
-                                          transaction.authorizationId:@"",
-                                          transaction.orderId:@"",
-                                          transaction.invoiceItems:@"",
-                                          transaction.transactionStatus:@"",
-                                          transaction.transationValue:@"",
-                                          transaction.customerServiceCharge:@"",
-                                          transaction.invoiceDisplayValue:@"",
-                                          transaction.dueValue:@"",
-                                          transaction.currency:@"",
-                                          transaction.apiCustomFileds:@""
+    NSDictionary *successRespnoseDict = @{transaction.customerName:@"customerName",
+                                          transaction.customerEmail:@"customerEmailAddress",
+                                          transaction.invoiceId:@"invoiceId",
+                                          transaction.invoiceReference:@"invoiceReference",
+                                          transaction.createdDate:@"createdDate",
+                                          transaction.invoiceValue:@"invoiceValue",
+                                          transaction.comments:@"comments",
+                                          transaction.customerMobile:@"customerMobileNo",
+                                          transaction.transactionDate:@"transactionDate",
+                                          transaction.paymentGateway:@"paymentGateway",
+                                          transaction.referenceId:@"referenceId",
+                                          transaction.trackId:@"trackId",
+                                          transaction.transactionId:@"transactionId",
+                                          transaction.paymentId:@"paymentId",
+                                          transaction.authorizationId:@"authorizationId",
+                                          transaction.orderId:@"orderId",
+                                          transaction.invoiceItems:@"invoiceItems",
+                                          transaction.transactionStatus:@"transactionStatus",
+                                          transaction.transationValue:@"transationValue",
+                                          transaction.customerServiceCharge:@"customerServiceCharge",
+                                          transaction.invoiceDisplayValue:@"invoiceDisplayValue",
+                                          transaction.dueValue:@"dueValue",
+                                          transaction.currency:@"currency",
+                                          transaction.apiCustomFileds:@"apiCustomFieild"
                                           };
  
-    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:successRespnoseDict];
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:successRespnoseDict];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:commandVar.callbackId];
 }
 

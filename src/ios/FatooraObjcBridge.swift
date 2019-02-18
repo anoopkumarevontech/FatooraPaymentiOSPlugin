@@ -118,7 +118,7 @@ public class FatooraObjcBridge:NSObject,MFInvoiceCreateStatusDelegate {
     @objc public func createInvoice(invoiceDict:[String:Any]) {
 
         print("Recived request is ===\(invoiceDict)");
-        let invoiceValue = Double(invoiceDict["price"] as! String)  ?? 0.0
+        let invoiceValue = Double(invoiceDict["productPrice"] as! String)  ?? 0.0
         let invoice = MFInvoice(invoiceValue: invoiceValue , customerName: invoiceDict["customerName"] as? String ?? "" , countryCode: .kuwait, displayCurrency: .Kuwaiti_Dinar_KWD)
         print("Invoaid is ===\(invoice.invoiceValue)")
         
