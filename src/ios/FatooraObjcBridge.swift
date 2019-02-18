@@ -116,28 +116,28 @@ public class FatooraObjcBridge:NSObject,MFInvoiceCreateStatusDelegate {
     
     
     @objc public func createInvoice(invoiceDict:[String:Any]) {
+
         print("Recived request is ===\(invoiceDict)");
         let invoiceValue = Double(invoiceDict["price"] as! String)  ?? 0.0
         let invoice = MFInvoice(invoiceValue: invoiceValue , customerName: invoiceDict["customerName"] as? String ?? "" , countryCode: .kuwait, displayCurrency: .Kuwaiti_Dinar_KWD)
         print("Invoaid is ===\(invoice.invoiceValue)")
         
-        invoice.customerEmail = invoiceDict["customerEmail"] as? String ?? ""// must be email
-        invoice.customerMobile = invoiceDict["customerMobile"] as? String ?? ""//Required
-        invoice.customerCivilId = ""
-        invoice.customerBlock = ""
-        invoice.customerStreet = ""
-        invoice.customerHouseBuildingNo = ""
-        invoice.customerReference = ""
+        invoice.customerEmail = invoiceDict["customerEmailAddress"] as? String ?? ""// must be email
+        invoice.customerMobile =  invoiceDict["customerMobileNo"] as? String ?? ""//Required
+        invoice.customerCivilId =  invoiceDict["customerCivilID"] as? String ?? ""
+        invoice.customerBlock = invoiceDict["customerBlockNo"] as? String ?? ""
+        invoice.customerStreet = invoiceDict["customerStreet"] as? String ?? ""
+        invoice.customerHouseBuildingNo = invoiceDict["customerBuildingNo"] as? String ?? ""
+        invoice.customerReference = invoiceDict["customerReference"] as? String ?? ""
+        invoice.expireDate = invoiceDict["expiryDate"] as? String ?? ""
         invoice.language = .arabic
         invoice.sendInvoiceOption = .sms
-        invoice.apiCustomFileds = ""
+        invoice.apiCustomFileds = invoiceDict["apiCustomFieild"] as? String ?? ""
         
          var productList = [MFProduct]()
-        for prodctDict in invoiceDict["productArray"] as! [[String:Any]] {
-            let product = MFProduct(name: prodctDict["product_name"] as! String, unitPrice: Double(prodctDict["unit_value"] as! String) ?? 0.0, quantity: Int(prodctDict["quantity"] as! String) ?? 0)
+        
+            let product = MFProduct(name: invoiceDict["productName"] as! String, unitPrice: Double(invoiceDict["productPrice"] as! String) ?? 0.0, quantity: Int(invoiceDict["productQuantity"] as! String) ?? 0)
             productList.append(product)
-            invoice.invoiceItems = productList
-        }
         
         MFPaymentRequest.shared.createInvoice(invoice: invoice, paymentMethod: .all, apiLanguage: .english)
     }
