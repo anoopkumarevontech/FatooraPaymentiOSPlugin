@@ -50,7 +50,7 @@
 
 - (void)didBridgeInvoiceCreateFailWithError:(BridgeMFFailResponse *)error{
     NSLog(@"Fail=====%@",error.description);
-    NSDictionary *dict  = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInteger:error.bstatusCode],@"statusCode",error.errorDescription,@"errorDescription", nil];
+    NSDictionary *dict  = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInteger:error.bstatusCode],@"statusCode",error.berrorDescription,@"errorDescription", nil];
    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:dict];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:commandVar.callbackId];
 }
