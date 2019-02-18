@@ -43,7 +43,7 @@
 
 - (void)didBridgePaymentCancel{
     NSLog(@"Payment cancelled");
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Payment cancelled"];
+    CDVPluginResult * pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Payment cancelled"];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:commandVar.callbackId];
     
 }
