@@ -74,7 +74,7 @@
                                           transaction.paymentId:@"paymentId",
                                           transaction.authorizationId:@"authorizationId",
                                           transaction.orderId:@"orderId",
-                                          transaction.invoiceItems:@"invoiceItems",
+                                        //   transaction.invoiceItems:@"invoiceItems",
                                           transaction.transactionStatus:@"transactionStatus",
                                           transaction.transationValue:@"transationValue",
                                           transaction.customerServiceCharge:@"customerServiceCharge",

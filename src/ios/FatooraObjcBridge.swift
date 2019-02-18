@@ -73,7 +73,7 @@ public class BridgeMTTransaction:NSObject {
     
    @objc public var orderId = ""
     
-   @objc public var invoiceItems = [BridgeInvoiceItem]()
+//    @objc public var invoiceItems = [BridgeInvoiceItem]()
     
    @objc public var transactionStatus:NSNumber = 0
     
@@ -147,7 +147,30 @@ public class FatooraObjcBridge:NSObject,MFInvoiceCreateStatusDelegate {
     public func didInvoiceCreateSucess(transaction: MFTransaction) {
         guard fatooraBridgeDelegate == nil else {
             let bridgeTransaction  = BridgeMTTransaction()
-            bridgeTransaction.apiCustomFileds = transaction.apiCustomFileds ?? ""
+            bridgeTransaction.customerName = transaction.customerName ?? ""
+            bridgeTransaction.customerEmail =    transaction.customerEmail ?? ""
+            bridgeTransaction.invoiceId =   transaction.invoiceId ?? ""
+            bridgeTransaction.invoiceReference =  transaction.invoiceReference ?? ""
+            bridgeTransaction.createdDate =  transaction.createdDate ?? ""
+            bridgeTransaction.invoiceValue =  (transaction.invoiceValue as NSNumber?) ?? NSNumber(value: 0)
+            bridgeTransaction.comments =  transaction.comments ?? ""
+            bridgeTransaction.customerMobile =  transaction.customerMobile ?? ""
+            bridgeTransaction.transactionDate =  transaction.transactionDate ?? ""
+            bridgeTransaction.paymentGateway =  transaction.paymentGateway ?? ""
+            bridgeTransaction.referenceId =  transaction.referenceId ?? ""
+            bridgeTransaction.trackId =  transaction.trackId ?? ""
+            bridgeTransaction.transactionId =  transaction.transactionId ?? ""
+            bridgeTransaction.paymentId =  transaction.paymentId ?? ""
+            bridgeTransaction.authorizationId = transaction.authorizationId ?? ""
+            bridgeTransaction.orderId = transaction.orderId ?? ""
+//            bridgeTransaction.invoiceItems = transaction.invoiceItems![0]
+            bridgeTransaction.transactionStatus =     (transaction.transactionStatus as NSNumber?) ?? NSNumber(value: 0)
+            bridgeTransaction.transationValue =  transaction.transationValue ?? ""
+            bridgeTransaction.customerServiceCharge =  transaction.customerServiceCharge ?? ""
+            bridgeTransaction.invoiceDisplayValue =   transaction.invoiceDisplayValue ?? ""
+            bridgeTransaction.dueValue =  transaction.dueValue ?? ""
+            bridgeTransaction.currency =   transaction.currency ?? ""
+            bridgeTransaction.apiCustomFileds =   transaction.apiCustomFileds ?? ""
             
             fatooraBridgeDelegate?.didBridgeInvoiceCreateSucess(transaction: bridgeTransaction)
             return
