@@ -5,7 +5,7 @@ module.exports.coolMethod = function (arg0, success, error) {
 };
 
 
-module.exports.initialisePaymentDetails = function(arg0,success,failure){
+module.exports.initialisePaymentDetails = function(arg0,success,error){
     exec(success,error,'FatooraPayMentiOSPlugin','initialisePaymentDetails',[arg0]);
 };
 
