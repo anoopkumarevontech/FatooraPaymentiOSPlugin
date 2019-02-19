@@ -1,8 +1,11 @@
 # FatooraPaymentiOSPlugin
-Add the plugin using command below.
-ionic cordova plugin add https://github.com/anoopkumarevontech/FatooraPaymentiOSPlugin.git --save
-Create a Provider file same like below :-
 
+**Add the plugin using command below.**
+```
+ionic cordova plugin add https://github.com/anoopkumarevontech/FatooraPaymentiOSPlugin.git --save
+```
+**Create a Provider file same like below :-**
+```
 import { Injectable } from '@angular/core';
 import { Plugin,Cordova} from '@ionic-native/core';
 
@@ -34,8 +37,11 @@ return;
 }
   
 }
-How to call function from screen (For exapmle from Home.ts) :-
+```
 
+**How to call function from screen (For exapmle from Home.ts) :-**
+
+```
 import { FatooraProvider } from '../../providers/fatoora/fatoora';
 @Component({
   selector: 'page-home',
@@ -87,7 +93,5 @@ export class HomePage {
   }).catch(error =>{
       console.log("---in payNow error---",JSON.stringify(error))
   })
-
   }
-
-}
+}```
