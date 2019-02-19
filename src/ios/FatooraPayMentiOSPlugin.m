@@ -2,7 +2,8 @@
 
 #import <Cordova/CDV.h>
 #import <MFSDK/MFSDK.h>
-#import <MyApp-Swift.h>
+#import <firstTeacher-Swift.h>
+// #import <MyApp-Swift.h>
 //#import <MFSDKDemo-Swift.h>
 
 
