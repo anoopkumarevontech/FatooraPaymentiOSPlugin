@@ -146,13 +146,13 @@ public class FatooraObjcBridge:NSObject,MFInvoiceCreateStatusDelegate {
         case "knet":
             paymntMthd = .knet
         case "mada":
-            paymntMthd = .knet
+            paymntMthd = .mada
         case "visamaster":
             paymntMthd = .visaMaster
         case "sadat":
             paymntMthd = .sadat
         case "benefit":
-            paymntMthd = .knet
+            paymntMthd = .benefit
         case "debitcarduae":
             paymntMthd = .debitCardUAE
         case "qatardebitcard":
@@ -162,7 +162,8 @@ public class FatooraObjcBridge:NSObject,MFInvoiceCreateStatusDelegate {
         case "amex":
             paymntMthd = .amex
         default:
-            paymntMthd = .all            
+            paymntMthd = .all
+            
         }
         MFPaymentRequest.shared.createInvoice(invoice: invoice, paymentMethod: paymntMthd, apiLanguage: .english)
     }
