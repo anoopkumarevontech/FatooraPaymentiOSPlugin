@@ -121,7 +121,7 @@ public class FatooraObjcBridge:NSObject,MFInvoiceCreateStatusDelegate {
         let invoiceValue = Double(invoiceDict["productPrice"] as! String)  ?? 0.0
         let invoice = MFInvoice(invoiceValue: invoiceValue , customerName: invoiceDict["customerName"] as? String ?? "" , countryCode: .kuwait, displayCurrency: .Kuwaiti_Dinar_KWD)
         print("Invoaid is ===\(invoice.invoiceValue)")
-        
+        let language = (invoiceDict["language"] as? String) ?? ""
         invoice.customerEmail = invoiceDict["customerEmailAddress"] as? String ?? ""// must be email
         invoice.customerMobile =  invoiceDict["customerMobileNo"] as? String ?? ""//Required
         invoice.customerCivilId =  invoiceDict["customerCivilID"] as? String ?? ""
@@ -130,7 +130,7 @@ public class FatooraObjcBridge:NSObject,MFInvoiceCreateStatusDelegate {
         invoice.customerHouseBuildingNo = invoiceDict["customerBuildingNo"] as? String ?? ""
         invoice.customerReference = invoiceDict["customerReference"] as? String ?? ""
         invoice.expireDate = invoiceDict["expiryDate"] as? String ?? ""
-        invoice.language = .arabic
+        invoice.language = (language == "english") ? .english : .arabic
         invoice.sendInvoiceOption = .sms
         invoice.apiCustomFileds = invoiceDict["apiCustomFieild"] as? String ?? ""
         
@@ -138,8 +138,33 @@ public class FatooraObjcBridge:NSObject,MFInvoiceCreateStatusDelegate {
         
             let product = MFProduct(name: invoiceDict["productName"] as! String, unitPrice: Double(invoiceDict["productPrice"] as! String) ?? 0.0, quantity: Int(invoiceDict["productQuantity"] as! String) ?? 0)
             productList.append(product)
-        
-        MFPaymentRequest.shared.createInvoice(invoice: invoice, paymentMethod: .all, apiLanguage: .english)
+
+         var paymntMthd = MFPaymentMethod.all
+        switch (invoiceDict["paymentMethod"] as? String)?.lowercased() ?? "" {
+        case "all":
+            paymntMthd = .all
+        case "knet":
+            paymntMthd = .knet
+        case "mada":
+            paymntMthd = .knet
+        case "visamaster":
+            paymntMthd = .visaMaster
+        case "sadat":
+            paymntMthd = .sadat
+        case "benefit":
+            paymntMthd = .knet
+        case "debitcarduae":
+            paymntMthd = .debitCardUAE
+        case "qatardebitcard":
+            paymntMthd = .qatarDebitCard
+        case "mpgs":
+            paymntMthd = .mpgs
+        case "amex":
+            paymntMthd = .amex
+        default:
+            paymntMthd = .all            
+        }
+        MFPaymentRequest.shared.createInvoice(invoice: invoice, paymentMethod: paymntMthd, apiLanguage: .english)
     }
     
     //MARK:- FrameWork Delegates
