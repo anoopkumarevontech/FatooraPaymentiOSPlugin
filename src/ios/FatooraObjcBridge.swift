@@ -119,7 +119,7 @@ public class FatooraObjcBridge:NSObject,MFInvoiceCreateStatusDelegate {
 
         print("Recived request is ===\(invoiceDict)");
         let invoiceValue = Double(invoiceDict["productPrice"] as! String)  ?? 0.0
-        let invoice = MFInvoice(invoiceValue: invoiceValue , customerName: invoiceDict["customerName"] as? String ?? "" , countryCode: .kuwait, displayCurrency: .Kuwaiti_Dinar_KWD)
+        let invoice = MFInvoice(invoiceValue: invoiceValue , customerName: invoiceDict["customerName"] as? String ?? "" , countryCode: .saudiArabia, displayCurrency: .Saudi_Riyal_SAR)
         print("Invoaid is ===\(invoice.invoiceValue)")
         let language = (invoiceDict["language"] as? String) ?? ""
         invoice.customerEmail = invoiceDict["customerEmailAddress"] as? String ?? ""// must be email
@@ -189,7 +189,6 @@ public class FatooraObjcBridge:NSObject,MFInvoiceCreateStatusDelegate {
             bridgeTransaction.paymentId =  transaction.paymentId ?? ""
             bridgeTransaction.authorizationId = transaction.authorizationId ?? ""
             bridgeTransaction.orderId = transaction.orderId ?? ""
-//            bridgeTransaction.invoiceItems = transaction.invoiceItems![0]
             bridgeTransaction.transactionStatus =     (transaction.transactionStatus as NSNumber?) ?? NSNumber(value: 0)
             bridgeTransaction.transationValue =  transaction.transationValue ?? ""
             bridgeTransaction.customerServiceCharge =  transaction.customerServiceCharge ?? ""
