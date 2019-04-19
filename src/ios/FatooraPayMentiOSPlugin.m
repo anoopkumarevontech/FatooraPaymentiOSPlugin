@@ -2,7 +2,8 @@
 
 #import <Cordova/CDV.h>
 #import <MFSDK/MFSDK.h>
-#import <firstTeacher-Swift.h>
+#import <First_Teacher-Swift.h>
+//#import <firstTeacher-Swift.h> project name changes to above
 // #import <MyApp-Swift.h>
 //#import <MFSDKDemo-Swift.h>
 
